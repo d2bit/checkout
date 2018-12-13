@@ -1,4 +1,4 @@
-require './offers'
+require './lib/offers'
 
 class PricingRules
   def initialize(items: [], offers: [])

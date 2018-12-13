@@ -1,10 +1,10 @@
-require './amount'
+require './lib/amount'
 
 RSpec.describe Amount do
   describe '#+' do
     it 'sums 2 instances' do
-      amount = described_class.new(100, '$')
-      expected_sum = described_class.new(200, '$')
+      amount = described_class.new(1_00, '$')
+      expected_sum = described_class.new(2_00, '$')
 
       sum = amount + amount
 
@@ -12,8 +12,8 @@ RSpec.describe Amount do
     end
 
     it 'raises an error with distinct currencies' do
-      amount = described_class.new(100, '$')
-      another_ccy_amount = described_class.new(100, 'EUR')
+      amount = described_class.new(1_00, '$')
+      another_ccy_amount = described_class.new(1_00, 'EUR')
 
       expect { amount + another_ccy_amount }.to raise_error(described_class::NoMatchCurrencyError)
     end
@@ -21,8 +21,8 @@ RSpec.describe Amount do
 
   describe '#times' do
     it 'computes an amount integer multiplication' do
-      amount = described_class.new(100, '$')
-      expected_prod = described_class.new(200, '$')
+      amount = described_class.new(1_00, '$')
+      expected_prod = described_class.new(2_00, '$')
 
       prod = amount.times(2)
 
@@ -32,8 +32,8 @@ RSpec.describe Amount do
 
   describe '#==' do
     it 'returns true if cents and symbol match' do
-      one_dollar = described_class.new(100, '$')
-      another_dollar = described_class.new(100, '$')
+      one_dollar = described_class.new(1_00, '$')
+      another_dollar = described_class.new(1_00, '$')
 
       comparison = one_dollar == another_dollar
 
@@ -41,8 +41,8 @@ RSpec.describe Amount do
     end
 
     it 'returns false if cents does not match' do
-      one_dollar = described_class.new(100, '$')
-      two_dollars = described_class.new(200, '$')
+      one_dollar = described_class.new(1_00, '$')
+      two_dollars = described_class.new(2_00, '$')
 
       comparison = one_dollar == two_dollars
 
@@ -50,8 +50,8 @@ RSpec.describe Amount do
     end
 
     it 'returns false if symbol does not match' do
-      one_dollar = described_class.new(100, '$')
-      one_euro = described_class.new(100, 'EUR')
+      one_dollar = described_class.new(1_00, '$')
+      one_euro = described_class.new(1_00, 'EUR')
 
       comparison = one_dollar == one_euro
 
@@ -61,7 +61,7 @@ RSpec.describe Amount do
 
   describe '#to_s' do
     it 'formats the amount' do
-      one_dollar = described_class.new(100, '$')
+      one_dollar = described_class.new(1_00, '$')
       expected_string = '$1.00'
 
       string = one_dollar.to_s

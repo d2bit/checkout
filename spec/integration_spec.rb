@@ -1,8 +1,8 @@
-require './checkout'
-require './pricing_rules.rb'
-require './item.rb'
-require './amount.rb'
-require './offers.rb'
+require './lib/checkout'
+require './lib/pricing_rules.rb'
+require './lib/item.rb'
+require './lib/amount.rb'
+require './lib/offers.rb'
 
 RSpec.describe 'Integration' do
   let(:green_tea) { Item.new('GR1', 'Green tea', Amount.new(3_11, '£')) }

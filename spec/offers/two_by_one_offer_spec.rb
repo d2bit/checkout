@@ -1,10 +1,10 @@
-require './item'
-require './amount'
-require './offers/two_by_one_offer'
+require './lib/item'
+require './lib/amount'
+require './lib/offers/two_by_one_offer'
 
 RSpec.describe Offers::TwoByOneOffer do
-  let(:item) { Item.new('IT1', 'An Item', Amount.new(100, 'EUR')) }
-  let(:another_item) { Item.new('IT2', 'Another Item', Amount.new(550, 'EUR')) }
+  let(:item) { Item.new('IT1', 'An Item', Amount.new(1_00, 'EUR')) }
+  let(:another_item) { Item.new('IT2', 'Another Item', Amount.new(5_50, 'EUR')) }
   subject { described_class.new(item) }
 
   describe '#valid_for?' do
@@ -24,7 +24,7 @@ RSpec.describe Offers::TwoByOneOffer do
   describe '#total_for' do
     it 'computes the total without applying the offer' do
       checkout = [item, another_item]
-      expected_amount = Amount.new(100, 'EUR')
+      expected_amount = Amount.new(1_00, 'EUR')
 
       amount = subject.total_for(checkout)
 
@@ -33,7 +33,7 @@ RSpec.describe Offers::TwoByOneOffer do
 
     it 'computes the total with the applied offer' do
       checkout = [item, another_item, item]
-      expected_amount = Amount.new(100, 'EUR')
+      expected_amount = Amount.new(1_00, 'EUR')
 
       amount = subject.total_for(checkout)
 

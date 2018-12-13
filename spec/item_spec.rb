@@ -1,4 +1,4 @@
-require './item'
+require './lib/item'
 
 RSpec.describe Item do
   describe '#==' do

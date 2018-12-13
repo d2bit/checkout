@@ -1,10 +1,10 @@
-require './item'
-require './amount'
-require './offers/bulk_price_offer'
+require './lib/item'
+require './lib/amount'
+require './lib/offers/bulk_price_offer'
 
 RSpec.describe Offers::BulkPriceOffer do
-  let(:item) { Item.new('IT1', 'An Item', Amount.new(100, 'EUR')) }
-  let(:another_item) { Item.new('IT2', 'Another Item', Amount.new(550, 'EUR')) }
+  let(:item) { Item.new('IT1', 'An Item', Amount.new(1_00, 'EUR')) }
+  let(:another_item) { Item.new('IT2', 'Another Item', Amount.new(5_50, 'EUR')) }
   subject { described_class.new(item, 3, Amount.new(80, 'EUR')) }
 
   describe '#valid_for?' do
@@ -33,7 +33,7 @@ RSpec.describe Offers::BulkPriceOffer do
 
     it 'computes the total without applying the offer' do
       checkout = [item, another_item, item]
-      expected_amount = Amount.new(100, 'EUR').times(2)
+      expected_amount = Amount.new(1_00, 'EUR').times(2)
 
       amount = subject.total_for(checkout)
 

@@ -1,4 +1,4 @@
-require './offers'
+require './lib/offers'
 
 RSpec.describe Offers do
   describe '.no_offer_on' do

@@ -1,4 +1,4 @@
-require './checkout'
+require './lib/checkout'
 
 RSpec.describe Checkout do
   describe '#total' do
