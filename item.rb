@@ -6,4 +6,8 @@ class Item
     @name = name
     @amount = amount
   end
+
+  def ==(item)
+    code == item.code
+  end
 end

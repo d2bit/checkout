@@ -12,6 +12,10 @@ class Amount
     Amount.new(cents + amount.cents, symbol)
   end
 
+  def times(operand)
+    Amount.new(cents * operand, symbol)
+  end
+
   def ==(amount)
     symbol == amount.symbol && cents == amount.cents
   end

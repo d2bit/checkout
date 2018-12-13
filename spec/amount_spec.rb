@@ -19,6 +19,17 @@ RSpec.describe Amount do
     end
   end
 
+  describe '#times' do
+    it 'computes an amount integer multiplication' do
+      amount = described_class.new(100, '$')
+      expected_prod = described_class.new(200, '$')
+
+      prod = amount.times(2)
+
+      expect(prod).to eq(expected_prod)
+    end
+  end
+
   describe '#==' do
     it 'returns true if cents and symbol match' do
       one_dollar = described_class.new(100, '$')
