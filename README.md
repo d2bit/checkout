@@ -56,3 +56,13 @@ Total price expected: £16.61
 Basket: GR1,CF1,SR1,CF1,CF1
 Total price expected: £30.57
 ```
+
+## How to setup
+
+```bash
+# install dependendencies
+bundle install
+
+# run the test suite
+bundle exec rspec
+```
