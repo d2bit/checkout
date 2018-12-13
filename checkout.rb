@@ -9,7 +9,7 @@ class Checkout
   end
 
   def total
-    pricing_rules.total_for(items)
+    pricing_rules.total_for(items).to_s
   end
 
   private
