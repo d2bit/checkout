@@ -31,4 +31,14 @@ RSpec.describe Offers do
       expect(offer).to be_a(Offers::BulkPriceOffer)
     end
   end
+
+  describe '.bulk_discount_on' do
+    it 'creates a BulkPriceOffer instance' do
+      item = double(:item)
+
+      offer = described_class.bulk_discount_on(item, bulk_size: 2, discount: 0.5)
+
+      expect(offer).to be_a(Offers::BulkDiscountOffer)
+    end
+  end
 end
