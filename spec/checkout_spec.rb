@@ -1,10 +1,13 @@
 require './checkout'
+require './pricing_rules.rb'
+require './item.rb'
+require './amount.rb'
 
 RSpec.describe Checkout do
   describe 'Integration' do
     it 'computes the total' do
-      pricing_rules = nil
-      green_tea = nil
+      green_tea = Item.new('GR1', 'Green tea', Amount.new(311, '£'))
+      pricing_rules = PricingRules.new(items: [green_tea])
       co = Checkout.new(pricing_rules)
       co.scan(green_tea)
       price = co.total
