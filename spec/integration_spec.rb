@@ -6,6 +6,7 @@ require './offers.rb'
 
 RSpec.describe 'Integration' do
   let(:green_tea) { Item.new('GR1', 'Green tea', Amount.new(311, '£')) }
+  let(:strawberries) { Item.new('SR1', 'Strawberries', Amount.new(500, '£')) }
 
   context 'having 1 item checkout' do
     it 'computes the total' do
@@ -29,6 +30,22 @@ RSpec.describe 'Integration' do
       co = Checkout.new(pricing_rules)
       co.scan(green_tea)
       co.scan(green_tea)
+      price = co.total
+
+      expect(price).to eq(expected_price)
+    end
+  end
+
+  context 'having 3 or more items' do
+    it 'computes the total with a bulk price' do
+      bulk_price_strawberries = Offers.bulk_price_on(strawberries, bulk_size: 3, amount: Amount.new(450, '£'))
+      pricing_rules = PricingRules.new(items: [strawberries], offers: [bulk_price_strawberries])
+      expected_price = '£13.50'
+
+      co = Checkout.new(pricing_rules)
+      co.scan(strawberries)
+      co.scan(strawberries)
+      co.scan(strawberries)
       price = co.total
 
       expect(price).to eq(expected_price)

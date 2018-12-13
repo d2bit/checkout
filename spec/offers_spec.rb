@@ -20,4 +20,15 @@ RSpec.describe Offers do
       expect(offer).to be_a(Offers::TwoByOneOffer)
     end
   end
+
+  describe '.bulk_price_on' do
+    it 'creates a BulkPriceOffer instance' do
+      item = double(:item)
+      amount = double(:amount)
+
+      offer = described_class.bulk_price_on(item, bulk_size: 2, amount: amount)
+
+      expect(offer).to be_a(Offers::BulkPriceOffer)
+    end
+  end
 end

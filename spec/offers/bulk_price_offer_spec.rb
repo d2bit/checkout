@@ -1,11 +1,11 @@
 require './item'
 require './amount'
-require './offers/two_by_one_offer'
+require './offers/bulk_price_offer'
 
-RSpec.describe Offers::TwoByOneOffer do
+RSpec.describe Offers::BulkPriceOffer do
   let(:item) { Item.new('IT1', 'An Item', Amount.new(100, 'EUR')) }
   let(:another_item) { Item.new('IT2', 'Another Item', Amount.new(550, 'EUR')) }
-  subject { described_class.new(item) }
+  subject { described_class.new(item, 3, Amount.new(80, 'EUR')) }
 
   describe '#valid_for?' do
     it 'returns true when the offer can be applied to the item' do
@@ -22,18 +22,18 @@ RSpec.describe Offers::TwoByOneOffer do
   end
 
   describe '#total_for' do
-    it 'computes the total without applying the offer' do
-      checkout = [item, another_item]
-      expected_amount = Amount.new(100, 'EUR')
+    it 'computes the total with the applied offer' do
+      checkout = [item, another_item, item, item]
+      expected_amount = Amount.new(80, 'EUR').times(3)
 
       amount = subject.total_for(checkout)
 
       expect(amount).to eq(expected_amount)
     end
 
-    it 'computes the total with the applied offer' do
+    it 'computes the total without applying the offer' do
       checkout = [item, another_item, item]
-      expected_amount = Amount.new(100, 'EUR')
+      expected_amount = Amount.new(100, 'EUR').times(2)
 
       amount = subject.total_for(checkout)
 
